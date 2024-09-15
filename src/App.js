@@ -49,6 +49,10 @@ const handleNext = () => {
 
   const handlePrevious = () => setCurrentQuestionIndex(currentQuestionIndex - 1);
 
+  const handleSkip = () => {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+  };
+
   const handleSubmit = () => {
     if (window.confirm("Are you sure you want to submit?")) {
       localStorage.setItem(sessionId, JSON.stringify({ answers, status: "COMPLETED" }));
@@ -56,10 +60,12 @@ const handleNext = () => {
     }
   };
 
+  const showSkipButton = currentQuestionIndex !== 4;
+
   return (
     <div className="App">
       {!surveyStarted && !surveyCompleted && <WelcomeScreen onStart={handleStart} />}
-      {surveyStarted && !surveyCompleted && (
+      {surveyStarted && !surveyCompleted &&  (
         <>
           <SurveyQuestion 
             question={currentQuestion}
@@ -71,9 +77,11 @@ const handleNext = () => {
           <NavigationButtons
             onPrevious={handlePrevious}
             onNext={handleNext}
+            onSkip={handleSkip} 
             onSubmit={handleSubmit}
             isLastQuestion={currentQuestionIndex === questions.length - 1}
-            nextDisabled={!currentAnswer}
+            nextDisabled={!currentAnswer && currentQuestion.type !== 'text'}
+            showSkipButton={showSkipButton}
           />
         </>
       )}
