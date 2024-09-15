@@ -19,7 +19,7 @@ export default function SurveyQuestion({ question, answer, onAnswerChange }) {
             <div className="mx-auto my-10 bg-[#c88cf0] w-4/5 h-[550px] flex flex-col justify-center items-center gap-8 border-2 border-white rounded-lg">
                 <h2 className="text-2xl">{question.text}</h2>
                 {question.type === "rating" ? (
-                    <div className="rating-container">{renderRatingOptions()}</div>
+                    <div className="rating-container flex flex-wrap justify-center mx-6">{renderRatingOptions()}</div>
                 ) : (
                     <textarea className="rounded-xl border-2 border-violet-600 w-2/5 h-24 p-2"
                         value={answer || ""}
