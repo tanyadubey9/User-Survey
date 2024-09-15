@@ -61,7 +61,13 @@ const handleNext = () => {
       {!surveyStarted && !surveyCompleted && <WelcomeScreen onStart={handleStart} />}
       {surveyStarted && !surveyCompleted && (
         <>
-          <SurveyQuestion question={questions[currentQuestionIndex]} answer={answers[questions[currentQuestionIndex].id]} onAnswerChange={handleAnswerChange} />
+          <SurveyQuestion 
+            question={currentQuestion}
+            answer={currentAnswer}
+            onAnswerChange={handleAnswerChange}
+            currentQuestionNumber={currentQuestionIndex + 1} 
+            totalQuestions={questions.length}
+            />
           <NavigationButtons
             onPrevious={handlePrevious}
             onNext={handleNext}
